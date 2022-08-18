@@ -12,7 +12,7 @@
       <h1 class="form-heading">Register Here</h1>
       <p>Welcome! Please Register Here!</p>
       <hr />
-      <form class="form-body" autocomplete="off" onsubmit="register()">
+      <form class="form-body">
         <div class="form-container">
           <label for="name">Name</label>
           <input
@@ -20,6 +20,7 @@
             type="text"
             id="name"
             name="name"
+            value="Name"
             placeholder="Enter your Name"
           />
         </div>
@@ -31,6 +32,8 @@
             id="email"
             name="email"
             placeholder="Enter your email"
+            autocomplete="off"
+            value="hey@gmail.com"
           />
         </div>
         <div class="form-container">
@@ -40,6 +43,8 @@
             type="password"
             name="password"
             placeholder="Enter your Pass"
+            autocomplete="off"
+            value="wterv"
           />
         </div>
         <input id="form-submit" type="submit" name="submit" value="submit" />
