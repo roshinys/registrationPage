@@ -6,6 +6,9 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   var userName = e.target.name.value;
   var userEmail = e.target.email.value;
+  if (localStorage.getItem(userEmail) !== null) {
+    localStorage.removeItem(userEmail);
+  }
   var user = {
     name: userName,
     email: userEmail,
@@ -16,6 +19,7 @@ form.addEventListener("submit", (e) => {
   parentNode.innerHTML = "";
   showUser();
 });
+
 function showUser() {
   Object.keys(localStorage).forEach((key) => {
     user = JSON.parse(localStorage.getItem(key));
@@ -25,11 +29,47 @@ function showUser() {
 }
 function showUserInFrontEnd(user) {
   var parentNode = document.getElementById("items");
-  if (Object.keys(localStorage).length != 1) {
+  if (Object.keys(localStorage).length != 0) {
     parentNode.style.display = "block";
   }
   var child = document.createElement("li");
-  child.innerText = `name = ${user.name}  email = ${user.email}`;
+  child.innerText = `${user.email} ${user.name}`;
+  var btn = document.createElement("button");
+  btn.className = "mg-5";
+  btn.className = "delete";
+  btn.innerText = "delete";
+  btn.value = `${user.email}`;
+  var editbtn = document.createElement("button");
+  editbtn.className = "mg-5";
+  editbtn.className = "edit";
+  editbtn.innerText = "edit";
+  editbtn.value = `${user.email}`;
+  child.append(editbtn);
+  child.appendChild(btn);
+
   parentNode.appendChild(child);
-  console.log(parentNode);
 }
+var parentNode = document.getElementById("items");
+parentNode.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete")) {
+    localStorage.removeItem(e.target.value);
+  }
+  if (e.target.classList.contains("edit")) {
+    var email = document.getElementById("email").value;
+    var name = document.getElementById("name").value;
+    if (email === e.target.value) {
+      localStorage.removeItem(e.target.value);
+      var user = {
+        name: name,
+        email: email,
+      };
+      var user_serialized = JSON.stringify(user);
+      localStorage.setItem(user.email, user_serialized);
+    } else {
+      alert("not a correct edit and input email");
+    }
+    console.log(name, email);
+  }
+  parentNode.innerHTML = "";
+  showUser();
+});
