@@ -12,7 +12,7 @@
       <h1 class="form-heading">Register Here</h1>
       <p>Welcome! Please Register Here!</p>
       <hr />
-      <form class="form-body">
+      <form class="form-body" onsubmit="submitForm(event)">
         <div class="form-container">
           <label for="name">Name</label>
           <input
@@ -20,6 +20,7 @@
             type="text"
             id="name"
             name="name"
+            value="roshin_msk"
             placeholder="Enter your Name"
             required
           />
@@ -30,6 +31,7 @@
             class="form-input"
             type="email"
             id="email"
+            value="roshin@gmail.com"
             name="email"
             placeholder="Enter your email"
             autocomplete="off"
@@ -50,8 +52,14 @@
         </div>
         <input id="form-submit" type="submit" name="submit" value="submit" />
       </form>
-      <ul id="items" style="display: none"></ul>
+      <ul id="items"></ul>
     </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+      integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="index.js"></script>
   </body>
 </html>
