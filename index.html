@@ -5,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <title>Registration Page</title>
+    <title>Register Page</title>
   </head>
   <body>
     <div class="form">
       <h1 class="form-heading">Register Here</h1>
       <p>Welcome! Please Register Here!</p>
-      <hr />
       <form class="form-body" onsubmit="submitForm(event)">
         <div class="form-container">
           <label for="name">Name</label>
@@ -31,8 +30,8 @@
             class="form-input"
             type="email"
             id="email"
-            value="roshin@gmail.com"
             name="email"
+            value="roshin@gmail.com"
             placeholder="Enter your email"
             autocomplete="off"
             required
@@ -52,7 +51,7 @@
         </div>
         <input id="form-submit" type="submit" name="submit" value="submit" />
       </form>
-      <ul id="items"></ul>
+      <ul id="listofusers"></ul>
     </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
