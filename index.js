@@ -46,8 +46,15 @@ var submitForm = (event) => {
 function showUserInFrontEnd(user) {
   // console.log(user);
   const parentNode = document.getElementById("listofusers");
-  const childHtml = `<li  id=${user._id} >${user.name} - ${user.email} <button onclick=deleteUser("${user._id}")>DeleteUser</button></li>`;
+  const childHtml = `<li  id=${user._id} >${user.name} - ${user.email} <button onclick=deleteUser("${user._id}")>DeleteUser</button>
+  <button onclick=editUser("${user.email}","${user.name}","${user._id}")>EditUser</button></li>`;
   parentNode.innerHTML = parentNode.innerHTML + childHtml;
+}
+//edit User
+function editUser(email, name, userId) {
+  document.getElementById("email").value = email;
+  document.getElementById("name").value = name;
+  deleteUser(userId);
 }
 
 //delete users;
