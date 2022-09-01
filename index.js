@@ -1,7 +1,24 @@
-// showUser();
-var form = document.querySelector(".form-body");
 //using axios and crud
-submitForm = (event) => {
+var form = document.querySelector(".form-body");
+window.addEventListener("DOMContentLoaded", () => {
+  axios
+    .get(
+      "https://crudcrud.com/api/ed73d95fff724af19de41a39f5d5e8ea/userDetails"
+    )
+    .then((res) => {
+      const users = res.data;
+      console.log(users);
+      users.forEach((user) => {
+        // console.log(user);
+        showUserInFrontEnd(user);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+var submitForm = (event) => {
   event.preventDefault();
   var userName = event.target.name.value;
   var userEmail = event.target.email.value;
@@ -9,15 +26,22 @@ submitForm = (event) => {
     name: userName,
     email: userEmail,
   };
-  var user_serialized = JSON.stringify(user);
-  axios.post(
-    "https://crudcrud.com/api/ed73d95fff724af19de41a39f5d5e8ea/userDetails",
-    user
-  );
-  showUserInFrontEnd(user);
+  axios
+    .post(
+      "https://crudcrud.com/api/ed73d95fff724af19de41a39f5d5e8ea/userDetails",
+      user
+    )
+    .then((res) => {
+      // console.log(res);
+      showUserInFrontEnd(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
+
 function showUserInFrontEnd(user) {
-  console.log(user);
+  // console.log(user);
   var parentNode = document.getElementById("items");
   var child = document.createElement("li");
   child.innerText = `${user.email} ${user.name}`;
@@ -38,6 +62,8 @@ function showUserInFrontEnd(user) {
 
 //using localStorage
 
+// showUser();
+// var form = document.querySelector(".form-body");
 // console.log(form);
 // form.addEventListener("submit", (e) => {
 //   e.preventDefault();
