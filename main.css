@@ -6,6 +6,9 @@ body {
   color: white;
   font-family: monospace;
 }
+#errorMessage {
+  color: red;
+}
 h1 {
   margin: 20px 20px 0 20px;
   padding: 0;

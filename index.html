@@ -8,6 +8,7 @@
     <title>Register Page</title>
   </head>
   <body>
+    <p id="errorMessage"></p>
     <div class="form">
       <h1 class="form-heading">Register Here</h1>
       <p>Welcome! Please Register Here!</p>
@@ -21,7 +22,6 @@
             name="name"
             value="roshin_msk"
             placeholder="Enter your Name"
-            required
           />
         </div>
         <div class="form-container">
@@ -34,19 +34,6 @@
             value="roshin@gmail.com"
             placeholder="Enter your email"
             autocomplete="off"
-            required
-          />
-        </div>
-        <div class="form-container">
-          <label for="password">Password</label>
-          <input
-            class="form-input"
-            type="password"
-            name="password"
-            placeholder="Enter your Pass"
-            autocomplete="off"
-            value="wterv"
-            required
           />
         </div>
         <input id="form-submit" type="submit" name="submit" value="submit" />
@@ -62,3 +49,5 @@
     <script src="index.js"></script>
   </body>
 </html>
+
+

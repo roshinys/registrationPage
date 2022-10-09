@@ -3,25 +3,18 @@ var form = document.querySelector(".form-body");
 
 //get all users
 window.addEventListener("DOMContentLoaded", async () => {
-  await axios
-    .get(
-      "https://crudcrud.com/api/e057dba6b15f411e81bfef5997c43291/userDetails"
-    )
-    .then((res) => {
-      const users = res.data;
-      console.log(users);
-      users.forEach((user) => {
-        showUserInFrontEnd(user);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const res = await axios.get("http://localhost:3000/user/add-user/");
+  // console.log(res);
+  const users = res.data;
+  console.log(users);
+  users.forEach((user) => {
+    showUserInFrontEnd(user);
+  });
 });
 
 //create users
 
-var submitForm = (event) => {
+var submitForm = async (event) => {
   event.preventDefault();
   var userName = event.target.name.value;
   var userEmail = event.target.email.value;
@@ -29,27 +22,24 @@ var submitForm = (event) => {
     name: userName,
     email: userEmail,
   };
-  axios
-    .post(
-      "https://crudcrud.com/api/e057dba6b15f411e81bfef5997c43291/userDetails",
-      user
-    )
-    .then((res) => {
-      // console.log(res);
-      showUserInFrontEnd(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const res = await axios.post("http://localhost:3000/user/add-user/", user);
+  if (!res.data.message) {
+    showUserInFrontEnd(res.data);
+  } else {
+    const errorTag = document.getElementById("errorMessage");
+    errorTag.innerText = res.data.message;
+  }
 };
 
 function showUserInFrontEnd(user) {
   // console.log(user);
   const parentNode = document.getElementById("listofusers");
-  const childHtml = `<li  id=${user._id} >${user.name} - ${user.email} <button onclick=deleteUser("${user._id}")>DeleteUser</button>
-  <button onclick=editUser("${user.email}","${user.name}","${user._id}")>EditUser</button></li>`;
+  const childHtml = `<li  id=${user.id} >${user.name} - ${user.email}
+  <button onclick=deleteUser("${user.id}")>DeleteUser</button>
+  <button onclick=editUser("${user.email}","${user.name}","${user.id}")>EditUser</button></li>`;
   parentNode.innerHTML = parentNode.innerHTML + childHtml;
 }
+
 //edit User
 function editUser(email, name, userId) {
   document.getElementById("email").value = email;
@@ -59,10 +49,9 @@ function editUser(email, name, userId) {
 
 //delete users;
 function deleteUser(userId) {
+  console.log(userId);
   axios
-    .delete(
-      `https://crudcrud.com/api/e057dba6b15f411e81bfef5997c43291/userDetails/${userId}`
-    )
+    .delete(`http://localhost:3000/user/delete-user/${userId}`)
     .then((res) => {
       console.log("successfully deleted user with id " + userId);
       removeUserFromScreen(userId);
